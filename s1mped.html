@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>s1mped — экономический бот для Telegram</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            line-height: 1.6;
+            color: #e0e0e0;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+            background: #0a0a14;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.15;
+            background: 
+                radial-gradient(circle at 10% 20%, rgba(0, 100, 255, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 90% 30%, rgba(0, 150, 255, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 50% 80%, rgba(64, 156, 255, 0.25) 0%, transparent 50%),
+                radial-gradient(circle at 20% 70%, rgba(0, 80, 255, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 10%, rgba(30, 144, 255, 0.2) 0%, transparent 50%);
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(10px, -10px) scale(1.05); }
+            50% { transform: translate(-5px, 5px) scale(0.95); }
+            75% { transform: translate(-10px, -5px) scale(1.02); }
+        }
+        
+        .neon-circle {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(40px);
+            z-index: -1;
+            animation: float 20s infinite ease-in-out;
+        }
+        
+        .circle-1 {
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(0, 100, 255, 0.3) 0%, rgba(0, 100, 255, 0) 70%);
+            top: 10%;
+            left: 5%;
+            animation-delay: 0s;
+        }
+        
+        .circle-2 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(30, 144, 255, 0.25) 0%, rgba(30, 144, 255, 0) 70%);
+            top: 60%;
+            right: 10%;
+            animation-delay: 5s;
+        }
+        
+        .circle-3 {
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, rgba(64, 156, 255, 0.2) 0%, rgba(64, 156, 255, 0) 70%);
+            bottom: 20%;
+            left: 15%;
+            animation-delay: 10s;
+        }
+        
+        .circle-4 {
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, rgba(0, 191, 255, 0.2) 0%, rgba(0, 191, 255, 0) 70%);
+            top: 20%;
+            right: 20%;
+            animation-delay: 15s;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        header {
+            border-bottom: 1px solid rgba(100, 149, 237, 0.3);
+            padding-bottom: 30px;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100px;
+            height: 2px;
+            background: linear-gradient(90deg, #6495ed, transparent);
+        }
+        
+        h1 {
+            color: #ffffff;
+            font-weight: 300;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+        
+        .tagline {
+            color: #a0b3d6;
+            font-size: 1.1em;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+        
+        section {
+            margin-bottom: 40px;
+            padding: 25px;
+            background: rgba(20, 25, 40, 0.7);
+            border-radius: 12px;
+            border: 1px solid rgba(100, 149, 237, 0.1);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+        
+        section:hover {
+            transform: translateY(-2px);
+            border-color: rgba(100, 149, 237, 0.2);
+        }
+        
+        h2 {
+            color: #ffffff;
+            border-left: 4px solid #6495ed;
+            padding-left: 15px;
+            margin-bottom: 20px;
+            font-weight: 400;
+            font-size: 1.4em;
+        }
+        
+        p {
+            margin-bottom: 15px;
+            color: #c0c9e0;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .feature-item {
+            padding: 20px;
+            background: rgba(30, 35, 50, 0.6);
+            border-radius: 8px;
+            border-left: 3px solid #4169e1;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-item:hover {
+            background: rgba(40, 45, 60, 0.8);
+            border-left-color: #6495ed;
+        }
+        
+        .feature-item h3 {
+            margin-top: 0;
+            color: #ffffff;
+            font-size: 1em;
+            font-weight: 500;
+            margin-bottom: 10px;
+        }
+        
+        .feature-item p {
+            color: #a0b3d6;
+            font-size: 0.95em;
+        }
+        
+        .bot-link {
+            text-align: center;
+            margin: 50px 0;
+            padding: 30px;
+            background: rgba(20, 25, 40, 0.8);
+            border-radius: 12px;
+            border: 1px solid rgba(100, 149, 237, 0.2);
+        }
+        
+        .bot-link a {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1.1em;
+            display: inline-block;
+            padding: 12px 35px;
+            border: 1px solid #6495ed;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            background: rgba(100, 149, 237, 0.1);
+        }
+        
+        .bot-link a:hover {
+            background: rgba(100, 149, 237, 0.2);
+            border-color: #4169e1;
+            transform: translateY(-2px);
+        }
+        
+        .bot-username {
+            margin-top: 15px;
+            font-size: 0.9em;
+            color: #a0b3d6;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 25px;
+            border-top: 1px solid rgba(100, 149, 237, 0.2);
+            color: #8899cc;
+            font-size: 0.9em;
+        }
+        
+        ul, ol {
+            padding-left: 25px;
+            margin-bottom: 20px;
+        }
+        
+        li {
+            margin-bottom: 10px;
+            color: #c0c9e0;
+        }
+        
+        code {
+            background: rgba(100, 149, 237, 0.1);
+            padding: 2px 8px;
+            border-radius: 4px;
+            color: #a0c8ff;
+            font-family: 'Consolas', monospace;
+            font-size: 0.9em;
+            border: 1px solid rgba(100, 149, 237, 0.2);
+        }
+        
+        .note {
+            font-style: italic;
+            color: #8899cc;
+            padding: 15px;
+            background: rgba(30, 35, 50, 0.6);
+            border-radius: 6px;
+            margin-top: 25px;
+            border-left: 3px solid #4682b4;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+            
+            .features {
+                grid-template-columns: 1fr;
+            }
+            
+            section {
+                padding: 20px;
+            }
+            
+            .neon-circle {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="neon-circle circle-1"></div>
+    <div class="neon-circle circle-2"></div>
+    <div class="neon-circle circle-3"></div>
+    <div class="neon-circle circle-4"></div>
+    
+    <div class="container">
+        <header>
+            <h1>s1mped</h1>
+            <div class="tagline">Экономический бот для Telegram. Без рекламы. Минимализм.</div>
+        </header>
+
+        <section>
+            <h2>О проекте</h2>
+            <p>Экономическая система с элементами RPG внутри Telegram. Не требует дополнительных приложений или установок.</p>
+            <p>Постепенное открытие возможностей по мере развития. Подходит для личного использования и поддержания активности в чатах.</p>
+        </section>
+
+        <section>
+            <h2>Основные возможности</h2>
+            <div class="features">
+                <div class="feature-item">
+                    <h3>Экономическая система</h3>
+                    <p>Несколько типов валют: димпы (основная), опыт, мандарины (временная), сердца.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Уровневая прокачка</h3>
+                    <p>Уровни от 1 до бесконечности. Уникальные звания до 250-го уровня.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Магазин</h3>
+                    <p>Покупка описаний профиля, валют, апгрейдов, VIP-статуса.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Социальные функции</h3>
+                    <p>Брачная система, бизнес, анонимные сообщения, переводы между пользователями.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Ежедневная активность</h3>
+                    <p>Команды .стрик, .трек, .заказ, .мульти с системой ожидания.</p>
+                </div>
+                <div class="feature-item">
+                    <h3>Групповые функции</h3>
+                    <p>Управление группами, РП-команды, система поинтов для чатов.</p>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Технические особенности</h2>
+            <ul>
+                <li>Использует SQLite для хранения данных</li>
+                <li>Модульная архитектура кода</li>
+                <li>GIF в РП командах</li>
+                <li>Есть темы для оформления, возможно создать свою</li>
+                <li>Московское время для всех временных меток</li>
+            </ul>
+            <div class="note">
+                Весь функционал доступен бесплатно. Платные функции отсутствуют.
+            </div>
+        </section>
+
+        <section>
+            <h2>Начало работы</h2>
+            <p>Для использования бота необходим аккаунт в Telegram.</p>
+            <ol>
+                <li>Перейдите по ссылке на бота</li>
+                <li>Нажмите кнопку "Start" или отправьте команду <code>/start</code></li>
+                <li>Система автоматически создаст ваш профиль</li>
+                <li>Используйте команду <code>/menu</code> для навигации</li>
+                <li>Читайте описание команд через <code>/help</code></li>
+            </ol>
+        </section>
+
+        <div class="bot-link">
+            <a href="https://t.me/s1mped_tgbot" target="_blank">Перейти к боту</a>
+            <div class="bot-username">@S1mped_bot</div>
+        </div>
+
+        <footer>
+            <p>Проект находится в активной разработке. Функционал может расширяться каждый день.</p>
+            <p>По вопросам и предложениям: @s1mped</p>
+            <p style="margin-top: 20px;">2025-2026</p>
+        </footer>
+    </div>
+</body>
+</html>
