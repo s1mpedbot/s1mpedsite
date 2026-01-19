@@ -1,4 +1,6 @@
-.env
-*.db
-__pycache__/
-*.pyc
+node_modules/
+dist/
+*.log
+*.tmp
+.DS_Store
+.idea/
