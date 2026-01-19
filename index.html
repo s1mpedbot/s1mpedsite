@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google-site-verification" content="7R8mS9-11XLBqKVQISyMYym_8i1e17NKgjZdJIciy5I" />
-    <meta name="description" content="s1mped bot это Telegram-бот для развлечений и взаимодействия с пользователями. Используй как чат-менеджера, развлекайся с друзьями">
-    <title>s1mped бот для Telegram</title>
+    <title>S1mped Bot — экономический Telegram-бот с RPG системой</title>
+    <meta name="description" content="S1mped Bot — экономический Telegram-бот с RPG элементами: уровни, валюта, магазин, социальные функции и команды для чатов. Бесплатно.">
+
     <style>
         * {
             margin: 0;
@@ -41,11 +42,23 @@
         }
         
         @keyframes float {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            25% { transform: translate(10px, -10px) scale(1.05); }
-            50% { transform: translate(-5px, 5px) scale(0.95); }
-            75% { transform: translate(-10px, -5px) scale(1.02); }
+            0% {
+                transform: translate(0, 0) scale(1);
+            }
+            20% {
+                transform: translate(30px, -20px) scale(1.08);
+            }
+            50% {
+                transform: translate(-20px, 30px) scale(0.95);
+            }
+            80% {
+                transform: translate(-40px, -10px) scale(1.05);
+            }
+            100% {
+                transform: translate(0, 0) scale(1);
+            }
         }
+
         
         .neon-circle {
             position: fixed;
@@ -264,6 +277,19 @@
             margin-top: 25px;
             border-left: 3px solid #4682b4;
         }
+
+        section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+            background: rgba(20, 25, 40, 0.25);
+            backdrop-filter: blur(8px);
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }       
         
         @media (max-width: 768px) {
             .container {
@@ -296,8 +322,8 @@
     
     <div class="container">
         <header>
-            <h1>s1mped</h1>
-            <div class="tagline">Экономический бот для Telegram. Без рекламы. Минимализм.</div>
+            <h1>s1mped — Telegram-бот</h1>
+            <div class="tagline">Экономический бот для Telegram. Без рекламы и доната.</div>
         </header>
 
         <section>
@@ -337,9 +363,69 @@
         </section>
 
         <section>
+            <h2>Нововведения</h2>
+
+            <p>
+                Добавлены ежедневные активности и системные изменения,
+                направленные на более стабильную и честную прокачку.
+            </p>
+
+            <h3>Ежедневные активности</h3>
+
+            <ul>
+                <li>
+                    <strong>Личная активность (<code>.стрик</code>)</strong><br>
+                    Базовая ежедневная награда для всех пользователей:
+                    димпы, опыт, карты, шанс роста брака и сердца, доход от бизнеса.
+                </li>
+
+                <li>
+                    <strong>Семейная активность (<code>.трек</code>)</strong><br>
+                    Доступна для пользователей с уровнем брака 25+.
+                    Награды: димпы на общий счёт, опыт, поинты отношений, сердца партнёру.
+                </li>
+
+                <li>
+                    <strong>Бизнес-активность (<code>.заказ</code>)</strong><br>
+                    Для владельцев бизнеса с уровнем 20+.
+                    Доход на карту, шанс найма или потери сотрудников, четыре типа заказов.
+                </li>
+            </ul>
+
+            <h3>Механика ожидания</h3>
+            <p>
+                Все активности используют общий кулдаун.
+                Чем выше уровень апгрейда, тем меньше время ожидания.
+            </p>
+
+            <h3>Изменения и улучшения</h3>
+
+            <ul>
+                <li>
+                    Добавлен раздел <strong>«Помощь»</strong> — вся информация теперь доступна прямо в меню бота.
+                </li>
+                <li>
+                    Опыт (<strong>XP</strong>) больше нельзя купить в магазине.
+                    В дальнейшем будет добавлен альтернативный способ получения.
+                </li>
+                <li>
+                    Добавлены <strong>поинты группы</strong> — начисляются за активность в чатах.
+                </li>
+            </ul>
+
+            <h3>Новая активность</h3>
+            <p>
+                Добавлена дополнительная активность для опытных пользователей
+                с уровнем 50+:<br>
+                <code>/multi</code>. Доступны все типы наград.
+            </p>
+        </section>
+
+
+        <section>
             <h2>Технические особенности</h2>
             <ul>
-                <li>Использует SQLite для хранения данных</li>
+                <li>Использует SQL для хранения данных</li>
                 <li>Модульная архитектура кода</li>
                 <li>GIF в РП командах</li>
                 <li>Есть темы для оформления, возможно создать свою</li>
@@ -364,14 +450,28 @@
 
         <div class="bot-link">
             <a href="https://t.me/s1mped_tgbot" target="_blank">Перейти к боту</a>
-            <div class="bot-username">@S1mped_bot</div>
+            <div class="bot-username">@s1mped_tgbot</div>
         </div>
 
         <footer>
             <p>Проект находится в активной разработке. Функционал может расширяться каждый день.</p>
-            <p>По вопросам и предложениям: @s1mped</p>
+            <p>По вопросам, предложениям, жалобе: @s1mped (разработчик)</p>
+            <p style="margin-top: 20px;">s1mped 1.28</p>
             <p style="margin-top: 20px;">2025-2026</p>
         </footer>
     </div>
 </body>
 </html>
+<script>
+const sections = document.querySelectorAll('section');
+
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+        }
+    });
+}, { threshold: 0.1 });
+
+sections.forEach(s => observer.observe(s));
+</script>
