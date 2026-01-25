@@ -39,122 +39,6 @@
                 radial-gradient(circle at 50% 80%, rgba(64, 156, 255, 0.25) 0%, transparent 50%),
                 radial-gradient(circle at 20% 70%, rgba(0, 80, 255, 0.15) 0%, transparent 50%),
                 radial-gradient(circle at 80% 10%, rgba(30, 144, 255, 0.2) 0%, transparent 50%);
-            /* Убираем анимацию для фона */
-        }
-        
-        .neon-circle {
-            position: fixed;
-            border-radius: 50%;
-            filter: blur(40px);
-            z-index: -1;
-            opacity: 0.15;
-            /* Без анимации */
-            animation: none;
-        }
-
-        
-        .circle-1 {
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, rgba(0, 100, 255, 0.3) 0%, rgba(0, 100, 255, 0) 70%);
-            top: 10%;
-            left: 5%;
-            animation-duration: 40s;
-        }
-        
-        .circle-2 {
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(30, 144, 255, 0.25) 0%, rgba(30, 144, 255, 0) 70%);
-            top: 60%;
-            right: 10%;
-            animation-duration: 50s;
-            animation-delay: -10s;
-        }
-        
-        .circle-3 {
-            width: 250px;
-            height: 250px;
-            background: radial-gradient(circle, rgba(64, 156, 255, 0.2) 0%, rgba(64, 156, 255, 0) 70%);
-            bottom: 20%;
-            left: 15%;
-            animation-duration: 35s;
-            animation-delay: -5s;
-        }
-        
-        .circle-4 {
-            width: 350px;
-            height: 350px;
-            background: radial-gradient(circle, rgba(0, 191, 255, 0.2) 0%, rgba(0, 191, 255, 0) 70%);
-            top: 20%;
-            right: 20%;
-            animation-duration: 45s;
-            animation-delay: -15s;
-        }
-        
-        /* Упрощаем анимацию для производительности */
-        @keyframes float {
-            0%, 100% {
-                transform: translate(0, 0) scale(1);
-            }
-            25% {
-                transform: translate(20px, -15px) scale(1.03);
-            }
-            50% {
-                transform: translate(-15px, 20px) scale(0.98);
-            }
-            75% {
-                transform: translate(-25px, -5px) scale(1.02);
-            }
-        }
-        
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            position: relative;
-            z-index: 1;
-        }
-        
-        /* Добавляем will-change для улучшения производительности анимаций */
-        section, .feature-item, .bot-link a {
-            will-change: transform;
-        }
-        
-        .circle-1 {
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, rgba(0, 100, 255, 0.3) 0%, rgba(0, 100, 255, 0) 70%);
-            top: 10%;
-            left: 5%;
-            animation-delay: 0s;
-        }
-        
-        .circle-2 {
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(30, 144, 255, 0.25) 0%, rgba(30, 144, 255, 0) 70%);
-            top: 60%;
-            right: 10%;
-            animation-delay: 5s;
-        }
-        
-        .circle-3 {
-            width: 250px;
-            height: 250px;
-            background: radial-gradient(circle, rgba(64, 156, 255, 0.2) 0%, rgba(64, 156, 255, 0) 70%);
-            bottom: 20%;
-            left: 15%;
-            animation-delay: 10s;
-        }
-        
-        .circle-4 {
-            width: 350px;
-            height: 350px;
-            background: radial-gradient(circle, rgba(0, 191, 255, 0.2) 0%, rgba(0, 191, 255, 0) 70%);
-            top: 20%;
-            right: 20%;
-            animation-delay: 15s;
         }
         
         .container {
@@ -390,18 +274,11 @@
             section {
                 padding: 20px;
             }
-            
-            .neon-circle {
-                display: none;
-            }
         }
     </style>
 </head>
 <body>
-    <div class="neon-circle circle-1"></div>
-    <div class="neon-circle circle-2"></div>
-    <div class="neon-circle circle-3"></div>
-    <div class="neon-circle circle-4"></div>
+    <!-- Круги удалены -->
     
     <div class="container">
         <header>
@@ -525,7 +402,6 @@
                 Спасибо всем за участие!
             </p>
         </section>
-
 
         <section>
             <h2>Технические особенности</h2>
